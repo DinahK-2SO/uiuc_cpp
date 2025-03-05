@@ -15,8 +15,12 @@ class Game {
     Game();
     void solve();
 
+    void move(int idxFromStack, int idxToStack, int layersToMove);
+
     // An overloaded operator<<, allowing us to print the stack via `cout<<`:
     friend std::ostream& operator<<(std::ostream & os, const Game & game);
+
+    Stack * getStack(int index);
 
   private:
     std::vector<Stack> stacks_;

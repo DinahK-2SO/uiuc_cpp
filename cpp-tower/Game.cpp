@@ -14,13 +14,33 @@
 using std::cout;
 using std::endl;
 
+
+
 // Solves the Tower of Hanoi puzzle.
 // (Feel free to call "helper functions" to help you solve the puzzle.)
 void Game::solve() {
   // Prints out the state of the game:
-  cout << *this << endl;
+  this->move(0, 1, 4);
 
   // @TODO -- Finish solving the game!
+}
+
+void Game::move(int idxFromStack, int idxToStack, int layersToMove)
+{
+  int idxOtherStack = 3 - idxFromStack - idxToStack;
+  if (layersToMove > 1)
+  {
+    move(idxFromStack, idxOtherStack, layersToMove - 1);
+    move(idxFromStack, idxToStack, 1);
+    move(idxOtherStack, idxToStack, layersToMove - 1);
+  }
+  else if (layersToMove == 1)
+  {
+    Cube c = stacks_[idxFromStack].removeTop();
+    stacks_[idxToStack].push_back(c);
+  }
+
+  cout << *this << endl;
 }
 
 // Default constructor to create the initial state:
